@@ -1,0 +1,90 @@
+<DOCTYPE>
+<html ng-app='SpotifyApp'>
+  <head>
+    <meta charset="utf-8">
+    <title>Spotify</title>
+        <!-- JQuery -->
+    <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+      <!-- Bootstrap - Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+    <script src="app/bower_components/angular-spotify/src/angular-spotify.js"></script>
+
+    <script src="app.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+
+  <body >
+    <div ng-controller="spotifyController as spotifyCtrl">
+       <div class= "container">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="jumbotron spotifyHeader">
+                <h1>Featured Playlist</h1>
+              </div>
+
+              <select
+                ng-model="spotifyCtrl.country"
+                ng-options="str for str in spotifyCtrl.names"
+                ng-change="spotifyCtrl.getPlaylists()">
+              </select>
+
+                <table class="table table-bordered table-striped">
+                  <thead>
+                    <tr> 
+                      <th colspan="3" class="spotifyHeader">
+                        {{ spotifyCtrl.message }}
+                      </th>
+                    </tr>
+                    <tr>
+                      <th colspan="2">
+                       Name
+                      </th>
+                      <th>
+                        Track Count
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <div class="tracksModal" 
+                      ng-show='spotifyCtrl.showTracks'>
+                       <div>
+                        <button class="btn btn-primary btn-sm fixedButton" ng-click='spotifyCtrl.closeTracksWindow()'>Close</button>
+                      </div>
+                      <div>
+                        <ul class="list-unstyled trackList">
+                          <li ng-repeat="track in spotifyCtrl.selectedPlaylistTracks">
+                            {{ track.track.name }}
+                          </li>
+                        </ul>
+                      <div>
+                    </div>
+                    <tr ng-repeat="playlist in spotifyCtrl.playlists">
+                      <td class="playlistCell" ng-click='spotifyCtrl.getTracksByPlaylist(playlist.owner.id, 
+                        playlist.id)'>
+                        {{ playlist.name }}
+                      <td>
+                        <img class="albumImage" ng-src='{{ playlist.images[0].url}}'
+                          ng-click='spotifyCtrl.getTracksByPlaylist(playlist.owner.id, playlist.id)'>
+                      </td>
+                      </td>
+                      <td>
+                        {{ playlist.tracks.total }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+        
+            </div>
+          </div>
+        </div>
+    </div>
+
+</body>
+</html>

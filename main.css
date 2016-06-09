@@ -1,0 +1,30 @@
+.spotifyHeader {
+  text-align: center;
+  font-size: 2em;
+}
+
+.albumImage {
+  height: 100px;
+}
+
+.albumImage, .playlistCell {
+  cursor: pointer;
+}
+
+.tracksModal {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 300px;
+  height: 450px;
+  position: fixed;
+  background: rgba(0, 0, 0, .6);
+  color: white;
+  overflow: scroll;
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.fixedButton {
+  margin: 10px;
+}
